@@ -1,0 +1,54 @@
+
+		<nav class="navbar navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="inicio">
+					<img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+					Controle de Despesas
+				</a>
+				<a href="/sair" class="form-text text-danger">Sair</a>
+			</div>
+		</nav>
+       <div class="container app">
+        <div class="row">
+
+            <div class="col-md-9">
+                <div class="container pagina">
+                    <div class="row">
+                        <div class="col">
+
+                                <h4>DETALHES</h4>
+				                <hr />
+                                <?php $despesa = $this->view->despesa; ?>
+								<div class="row mb-3 d-flex align-items-center tarefa">
+                                   <div class="col-sm-3">Funcionário:</div>
+                                    <div class="col-md-9"><?= $despesa['nome'] ?></div>
+                                    <div class="col-sm-3">E-mail Funcionário:</div>
+                                    <div class="col-md-9"><?= $despesa['email'] ?></div>
+                                    <div class="col-sm-3">Valor:</div>
+                                    <div class="col-md-9">R$<?= $despesa['valor'] ?></div>
+                                    <div class="col-sm-3">Categoria:</div>
+                                    <div class="col-md-9"><?=$despesa['categoria'] ?></div>
+                                    <div class="col-sm-3">Data:</div>
+                                    <div class="col-md-9"><?= date("d/m/Y", strtotime($despesa['data'])) ?></div>
+                                    <div class="col-sm-3">Descrição:</div>
+                                    <div class="col-md-9"><?=$despesa['descricao'] ?></div>
+                                    <div class="col-sm-3">Status:</div>
+                                    <div class="col-md-9"><?php if($despesa['status'] == 1){
+                                        echo 'Em Aberto';}
+                                        else if($despesa['status'] == 2){
+                                        echo 'Aprovado';}else{
+                                        echo 'Reprovado';} ?></div>
+								</div>
+				                
+                            
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-3 mt-4"><a href="despesas_pendentes" class="btn btn-secondary">Voltar</a></div>
+
+    </div>
+	

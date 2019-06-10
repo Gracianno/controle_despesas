@@ -1,0 +1,76 @@
+
+		<nav class="navbar navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="#">
+					<img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+					Controle de Despesas
+				</a>
+				<a href="/sair" class="form-text text-danger">Sair</a>
+			</div>
+		</nav>
+
+		<div class="container app">
+			<div class="row">
+				<div class="col-md-3 menu">
+					<ul class="list-group">
+					    <?php if($_SESSION['perfil'] == 1){ ?>
+						<li class="list-group-item active"><a href="inicio">Minhas Despesas</a></li>
+						<li class="list-group-item"><a href="nova_despesa">Nova Despesa</a></li>
+						<?php }else{ ?>
+						    <li class="list-group-item "><a href="inicio">Todas Despesas</a></li>
+    				        <li class="list-group-item active"><a href="despesas_pendentes">Despesas Pendentes</a></li>
+				        <?php } ?>
+					</ul>
+				</div>
+               
+				<div class="col-md-9">
+					<div class="container pagina">
+						<div class="row">
+							<div class="col">
+							
+							<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Titulo</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Status</th>
+    <th scope="col">Funcionario</th>
+        <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+							 <?php foreach($this->view->despesas as $despesa){ ?>
+								
+  <tbody>
+    <tr>
+      <th scope="row"><?=$despesa['titulo'] ?></th>
+      <td><?=$despesa['categoria']?></td>
+      <td><?=$despesa['valor']?></td>
+      <td><?php if($despesa['status'] == 1){
+                                        echo 'Em Aberto';}
+                                        else if($despesa['status'] == 2){
+                                        echo 'Aprovado';}else{
+                                        echo 'Reprovado';} ?></td>
+    <td><?=$despesa['nome']?></td>
+        <td><a href="/setStatus?id_despesa=<?= $despesa['id'] ?>&status=reprovar" class="btn btn-outline-danger btn-sm">Reprovar</a></td>
+    <td><a href="/setStatus?id_despesa=<?= $despesa['id'] ?>&status=aprovar" class="btn btn-outline-success btn-sm">Aprovar</a></td>
+<td><a href="detalhes?id_despesa=<?= $despesa['id'] ?>" class="btn btn-outline-info btn-sm">Detalhes</a></td>
+
+
+    </tr>
+  </tbody>
+							
+
+				<?php } ?>
+                                </table>
+							</div>
+						</div>
+					</div>
+						
+                </div>
+			</div>
+		</div>
+	

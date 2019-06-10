@@ -1,0 +1,74 @@
+
+		<nav class="navbar navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="inicio">
+					<img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+					Controle de Despesas
+				</a>
+				<a href="/sair" class="form-text text-danger">Sair</a>
+
+			</div>
+		</nav>
+		
+
+		<div class="container app">
+			<div class="row">
+				<div class="col-md-3 menu">
+					<ul class="list-group">
+						 <?php if($_SESSION['perfil'] == 1){ ?>
+						<li class="list-group-item "><a href="inicio">Minhas Despesas</a></li>
+						<li class="list-group-item active"><a href="nova_despesa">Nova Despesa</a></li>
+						<?php }else{ ?>
+						    <li class="list-group-item"><a href="inicio">Todas Despesas</a></li>
+    				        <li class="list-group-item active"><a href="despesas_pendentes">Despesas Pendentes</a></li>
+				        <?php } ?>
+					</ul>
+				</div>
+
+				<div class="col-md-9">
+					<div class="container pagina">
+						<div class="row">
+							<div class="col">
+								<h4>Nova Despesa</h4>
+								<hr />
+
+								<form method="post" action="/registrar_despesa">
+								    <div class="form-group">
+										<label>Titulo da Despesa</label>
+										<input type="text" class="form-control" placeholder="Titulo" name="titulo" required>
+									</div>
+									<div class="form-group">
+										<label>Valor</label>
+										<input type="number" class="form-control" placeholder="Valor" name="valor" min="1" required>
+									</div>
+								    <div class="form-group">
+                                        <label>Categoria</label>
+                                        <select name="categoria" class="form-control">
+                                           <?php foreach($this->view->categorias as $categoria){ ?>
+                                            <option><?= $categoria['nome'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                            
+                                    <div class="form-group">
+                                      <label>Descrição</label>
+                                      <textarea name="descricao" class="form-control" rows="3" required></textarea>
+                                    </div>
+								        
+									<button class="btn btn-success">Cadastrar</button>
+									<?php
+                                    if($this->view->erroDespesa){?>
+                                          <small class="form-text text-danger">Erro ao tentar realizar o cadastro, verifique os campos digitados</small>
+                                    <?php } ?>
+                                    <?php
+                                    if($this->view->cadastro){?>
+                                      <h3 class="form-text text-success">Despesa Cadastrado com Sucesso!!</h3>
+                                      <?php } ?>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	

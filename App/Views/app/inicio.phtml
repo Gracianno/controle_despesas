@@ -1,0 +1,71 @@
+
+    <nav class="navbar navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Controle de Despesas
+            </a>
+            <a href="/sair" class="form-text text-danger">Sair</a>
+        </div>
+    </nav>
+
+    <div class="container app">
+        <div class="row">
+            <div class="col-md-3 menu">
+                <ul class="list-group">
+                    <?php if($_SESSION['perfil'] == 1){ ?>
+                    <li class="list-group-item active"><a href="inicio">Minhas Despesas</a></li>
+                    <li class="list-group-item"><a href="nova_despesa">Nova Despesa</a></li>
+                    <?php }else{ ?>
+                    <li class="list-group-item active"><a href="inicio">Todas Despesas</a></li>
+                    <li class="list-group-item"><a href="despesas_pendentes">Despesas Pendentes</a></li>
+                    <?php } ?>
+                </ul>
+            </div>
+
+            <div class="col-md-9">
+                <div class="container pagina">
+                    <div class="row">
+                        <div class="col">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Titulo</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Valor</th>
+                                        <?php if($_SESSION['perfil'] == 2){ ?>
+                                        <th scope="col">Funcionário</th>
+                                        <?php } ?>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <?php foreach($this->view->despesas as $despesa){ ?>
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row"><?=$despesa['titulo'] ?></th>
+                                        <td><?=$despesa['categoria']?></td>
+                                        <td><?=$despesa['valor']?></td>
+                                        <?php if($_SESSION['perfil'] == 2){ ?>
+                                        <td><?=$despesa['nome']?></td>
+                                        <?php } ?>
+                                        <td><?php if($despesa['status'] == 1){
+                                        echo 'Em Aberto';}
+                                        else if($despesa['status'] == 2){
+                                        echo 'Aprovado';}else{
+                                        echo 'Reprovado';} ?></td>
+                                    </tr>
+                                </tbody>
+
+
+                                <?php } ?>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
